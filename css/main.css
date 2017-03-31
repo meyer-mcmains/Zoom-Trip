@@ -1,0 +1,44 @@
+.image {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 0px;
+    index: 1;
+    opacity: 0.5;
+}
+
+.nextImage {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 0px;
+    display: block;
+    index: -1;
+    opacity: 0.5;
+}
+
+body {
+	background-color: black;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    width: 30%;
+}
+
+.container {
+	width: 40%;
+	height: 98vh;
+    margin: auto;
+    float: left;
+}
+
+.wiki {
+    width: 30%;
+}
