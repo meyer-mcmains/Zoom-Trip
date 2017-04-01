@@ -2,8 +2,8 @@
 *.png
 
 # Sublime Project
-.sublime-project
-.sublime-workspace
+*.sublime-project
+*.sublime-workspace
 
 #############
 ## Windows detritus
