@@ -18,19 +18,6 @@ function zoom() {
 		imageSmall(image);
 	}
 
-	/*
-	if ($(window).height() < image.height() + 300 && main === 0)
-	{
-		changeImage(image);
-		main = 1;
-	}
-	else if ($(window).height() < nextImage.height() + 300 && main === 1)
-	{
-		changeImage(nextImage);
-		main = 0;
-	}
-	*/
-
 	if ($('.container').width() < image.width() || $('.container').height() < image.height() && main === 0)
 	{
 		changeImage(image);

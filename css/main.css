@@ -19,6 +19,15 @@
     opacity: 0.5;
 }
 
+.text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
 body {
 	background-color: black;
 }
@@ -30,6 +39,7 @@ body {
 
 .name {
     width: 30%;
+    position: relative;
 }
 
 .container {
@@ -41,4 +51,15 @@ body {
 
 .wiki {
     width: 30%;
+    position: relative;
+}
+
+.wiki-text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    word-break: break-all;
 }
