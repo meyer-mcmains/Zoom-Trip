@@ -74,7 +74,7 @@ function imageSmall(image) {
 }
 
 function changeImage(image) {
-	imgNum += 1;
+	imgNum = (imgNum % 13) + 1; //Gary is a math wiz
 		image.attr('src', 'images/' + imgNum + '.svg');
 	image.css('width', 10);
 	image.css('opacity', 0.5);

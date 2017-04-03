@@ -6,6 +6,8 @@
 *.sublime-project
 *.sublime-workspace
 *.bat
+*.exe
+*.dll
 
 #############
 ## Windows detritus
