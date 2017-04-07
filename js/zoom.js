@@ -1,6 +1,7 @@
 var imgNum = 2;
 var main = 0;
 var interval;
+var up = false;
 
 readSVG(imgNum);
 
@@ -9,7 +10,9 @@ $(document).on('wheel', zoom);
 $(document).mousedown(function() {
     interval = setInterval(performWhileMouseDown, 50);
 }).mouseup(function() {
-    clearInterval(interval);  
+    clearInterval(interval);
+    up = true;
+    console.log(up);
 });
 
 function performWhileMouseDown() {
@@ -21,8 +24,7 @@ function zoom() {
 	var image = ($('.image'));
 	var nextImage = ($('.nextImage'));
 
-	if (main === 0)
-	{
+	if (main === 0) {
 		imageMain(image);
 		imageSmall(nextImage);
 	}
@@ -32,13 +34,18 @@ function zoom() {
 		imageSmall(image);
 	}
 
-	if ($('.container').width() < image.width() || $('.container').height() < image.height() && main === 0)
-	{
+	if ($('.container').width() < image.width()+20 || ($('.container').height()-75) < image.height()+20 && main === 0) {
+		pause();
+	}
+	else if ($('.container').width() < nextImage.width()+20 || ($('.container').height()-75) < nextImage.height()+20 && main === 0) {
+		pause();
+	}
+
+	if ($('.container').width() < image.width() || ($('.container').height()-50) < image.height() && main === 0) {
 		changeImage(image);
 		main = 1;
 	}
-	else if ($('.container').width() < nextImage.width() || $('.container').height() < nextImage.height() && main === 1)
-	{
+	else if ($('.container').width() < nextImage.width() || ($('.container').height()-50) < nextImage.height() && main === 1) {
 		changeImage(nextImage);
 		main = 0;
 	}
@@ -74,8 +81,11 @@ function imageSmall(image) {
 }
 
 function changeImage(image) {
-	imgNum = (imgNum % 13) + 1; //Gary is a math wiz
-		image.attr('src', 'images/' + imgNum + '.svg');
+	imgNum++;
+	$('#name').hide();
+	$('#article').hide();
+	//imgNum = (imgNum % 14) + 1; //Gary is a math wiz
+	image.attr('src', 'images/' + imgNum + '.svg');
 	image.css('width', 10);
 	image.css('opacity', 0.5);
 
@@ -101,4 +111,21 @@ function getName(xml) {
     var text = tag.childNodes[0];
     console.log(text);
     $('#name').html(text);
+    tag = xmlDoc.getElementsByTagName("wiki")[0];
+    text = tag.childNodes[0];
+    console.log(text);
+    $('#article').html(text);
+}
+
+function pause() {
+	$('#name').fadeIn();
+	$('#article').fadeIn();
+	$(document).trigger('mouseup');
+	while (up == true)
+	{
+		if($(document).click())
+		{
+			break;
+		}
+	}
 }

@@ -35,6 +35,14 @@ body {
 .wrapper {
     display: flex;
     justify-content: center;
+
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
 }
 
 .name {
@@ -62,4 +70,12 @@ body {
     transform: translate(-50%, -50%);
     font-size: 20px;
     word-break: break-all;
+}
+
+#name {
+    display: none;
+}
+
+#article {
+    display: none;
 }
