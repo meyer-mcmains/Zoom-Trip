@@ -12,7 +12,6 @@ $(document).mousedown(function() {
 }).mouseup(function() {
     clearInterval(interval);
     up = true;
-    console.log(up);
 });
 
 function performWhileMouseDown() {
@@ -23,10 +22,12 @@ function zoom() {
 
 	var image = ($('.image'));
 	var nextImage = ($('.nextImage'));
+	var text = ($('.centerText'));
 
 	if (main === 0) {
 		imageMain(image);
 		imageSmall(nextImage);
+		increaseText(text);
 	}
 	else if (main === 1)
 	{
@@ -80,6 +81,20 @@ function imageSmall(image) {
 	image.css('z-index', -1);
 }
 
+function increaseText(text) {
+	var size = text.css('font-size');
+	size = parseInt(size, 10);
+	size += 20;
+
+	var opacity = text.css('opacity');
+	opacity = parseFloat(opacity, 10);
+	opacity += 0.05;
+
+	text.css('font-size', size);
+	text.css('z-index', 1);
+	text.css('opacity', opacity);
+}
+
 function changeImage(image) {
 	imgNum++;
 	$('#name').hide();
@@ -128,4 +143,9 @@ function pause() {
 			break;
 		}
 	}
+}
+
+function img1Error(image) {
+	$('.image').css('display', 'none');
+	$('.centerText').load('images/' + imgNum + '.txt');
 }
