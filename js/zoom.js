@@ -118,6 +118,16 @@ function readSVG(imgNum) {
 	};
 	xhttp.open("GET", "images/" + imgNum + ".svg", true);
 	xhttp.send();
+
+	var xhttp2;
+	xhttp2 = new XMLHttpRequest();
+	xhttp2.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	        getName2(this);
+	    }
+	};
+	xhttp2.open("GET", "images/" + imgNum + ".svg", true);
+	xhttp2.send();
 }
 
 function getName(xml) { 
@@ -126,8 +136,12 @@ function getName(xml) {
     var text = tag.childNodes[0];
     console.log(text);
     $('#name').html(text);
-    tag = xmlDoc.getElementsByTagName("wiki")[0];
-    text = tag.childNodes[0];
+}
+
+function getName2(xml) { 
+    var xmlDoc = xml.responseXML;
+    var tag = xmlDoc.getElementsByTagName("wiki")[0];
+    var text = tag.childNodes[0];
     console.log(text);
     $('#article').html(text);
 }
