@@ -9,6 +9,7 @@
 *.exe
 *.dll
 *.zip
+*.txt
 
 #############
 ## Windows detritus

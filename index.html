@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/main.css">
     <!-- get jquery before other scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/zoom.js"></script>
   </head>
 
   <body>
@@ -22,9 +23,8 @@
       
       <div class="container">
       
-      <img class="image" src="images/1.svg" onerror="img1Error(this);">
-      <img class="nextImage" src="images/2.svg" onerror="img2Error(this);">
-      <pre class="centerText"></pre>
+      <div id="main"></div>
+      <div id="secondary"></div>
 
       </div>
 
@@ -34,6 +34,5 @@
 
   </div>
 
-    <script src="js/zoom.js"></script>
   </body>
 </html>

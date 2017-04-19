@@ -6,6 +6,7 @@
     width: 0px;
     index: 1;
     opacity: 0.5;
+    display: block;
 }
 
 .nextImage {
@@ -51,15 +52,19 @@ body {
 }
 
 .container {
-	width: 40%;
+    width: 40%;
 	height: 98vh;
     margin: auto;
     float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wiki {
     width: 30%;
     position: relative;
+    overflow: hidden;
 }
 
 .wiki-text {
@@ -68,11 +73,12 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 20px;
+    font-size: 1.5vw;
 }
 
 #name {
     display: none;
+    font-size: 10vw;
 }
 
 #article {
@@ -87,9 +93,26 @@ body {
 }
 
 .centerText {
+    text-align: center;
     color: white;
+    font-size: 1px;
+    z-index: 1;
+    display: block;
+    opacity: 0.0;
+}
+
+.centerText2 {
+    text-align: center;
+    color: white;
+    font-size: 1px;
+    z-index: -1;
+    display: block;
+}
+
+#secondary {
     position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+#main {
+    position: absolute;
 }
