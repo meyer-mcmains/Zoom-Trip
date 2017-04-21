@@ -11,15 +11,62 @@ var first = 'first';
 var second = 'second';
 var up = false;
 var interval;
+var disabled = true;
+var choice = false;
+var path = '';
 
 
 //mouse down event
 $(document).mousedown(function() {
-    interval = setInterval(performWhileMouseDown, 50);
+	if (disabled === true) {
+		return;
+	}
+	else {
+		interval = setInterval(performWhileMouseDown, 50);
+	}
 }).mouseup(function() {
     clearInterval(interval);
     up = true;
 });
+
+//used for tutorial button click
+$(document).ready(function() {
+	$('.button').click(function() {
+	$('.tutorial').hide();
+	$('.trips').show();
+});
+});
+
+//tutorial trip button
+$(document).ready(function() {
+	$('#one').click(function() {
+		$('.trips').fadeOut();
+		path = 'tutorial/';
+		$('body').css('background-color', 'black');
+		disabled = false;
+	});
+});
+
+//choice1 button
+$(document).ready(function() {
+	$('.choice1').click(function() {
+		$('.choices').fadeOut();
+		$('.wrapper').show();
+		path = path + 'one/';
+		disabled = false;
+	});
+});
+
+//choice2 button
+$(document).ready(function() {
+	$('.choice2').click(function() {
+		$('.choices').fadeOut();
+		$('.wrapper').show();
+		path = path + 'two/';
+		disabled = false;
+	});
+});
+
 
 //if mouse down zoom
 function performWhileMouseDown() {
@@ -89,7 +136,7 @@ function zoom() {
 //attempt to get next file
 function get(var1, var2) {
 	$.ajax({
-		url:'images/' + var2 + '.svg',
+		url:path + var2 + '.svg',
 		error: function()
 		{	
 			var setClass;
@@ -134,6 +181,11 @@ function checkImage(image) {
 		number = image.data('num');
 		readSVG(number)
 		pause();
+
+		if (choice === true)
+		{
+			choose();
+		}
 	}
 }
 
@@ -149,6 +201,11 @@ function checkText(text) {
 			two = 1;
 			first = 'first';
 			second = 'second';
+		}
+
+		if (choice === true)
+		{
+			choose();
 		}
 	}
 }
@@ -214,7 +271,7 @@ function zoomSecondaryText(secText) {
 
 //read in from the text file
 function changeText(track, spec, num) {
-	var string = 'images/' + num + '.txt';
+	var string = path + num + '.txt';
 
 	$.get(string, function(data) {
 	text = '<div class="' + spec + '">'+ data + '</div>';
@@ -223,6 +280,15 @@ function changeText(track, spec, num) {
 	}
 	else {
 		$('#secondary').html(text);
+	}
+
+	if (data === '') {
+		choice = true;
+	}
+
+	if (data === 'exit code 1')
+	{
+		exit();
 	}
 	inText = $('.' + spec);
 	inText.css('font-size', '1px');
@@ -240,7 +306,7 @@ function changeText(track, spec, num) {
 
 //read in from the image file
 function changeImage(track, spec, num) {
-	img = '<img data-num="'+ num +'" class="' + spec + '" src="images/' + num + '.svg"/>';
+	img = '<img data-num="'+ num +'" class="' + spec + '" src="' + path + num + '.svg"/>';
 	if (track === 1) {
 		$('#main').html(img);
 	}
@@ -269,7 +335,7 @@ function readSVG(number) {
 	        getName(this);
 	    }
 	};
-	xhttp.open("GET", "images/" + number + ".svg", true);
+	xhttp.open("GET", path + number + ".svg", true);
 	xhttp.send();
 
 	var xhttp2;
@@ -279,7 +345,7 @@ function readSVG(number) {
 	        getName2(this);
 	    }
 	};
-	xhttp2.open("GET", "images/" + number + ".svg", true);
+	xhttp2.open("GET", path + number + ".svg", true);
 	xhttp2.send();
 }
 
@@ -318,4 +384,35 @@ function getTextSize(object) {
 	var size = object.css('font-size');
 	size = parseInt(size, 10);
 	return size;
+}
+
+//call this function to display choices
+function choose() {
+	$('.wrapper').hide();
+	$('.choices').fadeIn();
+	$('#main').html('');
+	$('#secondary').html('');
+	disabled = true;
+	getChoices('one', '.choice1', 'one');
+	getChoices('two', '.choice2', 'two');
+	choice = false;
+	imgNum = 0;
+}
+
+//get choices text from files
+function getChoices(choice, element, spec) {
+	var string = path + choice + '.txt';
+	$.get(string, function(data) {
+	var text = '<div class="' + spec + '">'+ data + '</div>'; 
+	$(element).html(text);
+	}, 'text');
+}
+
+//reached end of trip
+function exit() {
+	$('.wrapper').hide();
+	$('#main').html('');
+	$('#secondary').html('');
+	disabled = true;
+	$('.end').fadeIn();
 }

@@ -5,7 +5,7 @@
    
     <meta charset="utf-8">
     <!-- fonts utilized -->
-
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <!-- stylesheets -->
     <link rel="stylesheet" href="css/main.css">
     <!-- get jquery before other scripts -->
@@ -15,24 +15,55 @@
 
   <body>
 
-  <div class="wrapper">
-
-      <div class="name">
-        <div class="text"><span id="name"></span></div>
-      </div>
-      
-      <div class="container">
-      
-      <div id="main"></div>
-      <div id="secondary"></div>
-
-      </div>
-
-      <div class="wiki">
-         <div class="wiki-text"><p id="article"></p></div>
-      </div>
-
+  <div class="tutorial noselect">
+    <p class="heading">Welcome To ZoomTrip!</p>
+    <hr>
+    <p class="heading">What is ZoomTrip?</p>
+    <p class="tutText">ZoomTrip is a platform for interactive storytelling!</p>
+    <hr>
+    <p class="heading">How Do You Use It?</p>
+    <p class="tutText">Hold down your right mouse button to zoom.</p>
+    <p class="tutText">If zooming stops -> double click to continue.</p>
+    <hr>
+    <div class="button">Lets Zoom!</div>
   </div>
+
+  <div class="trips noselect">
+    <p class="heading">Choose A Trip</p>
+    <hr>
+    <div id="one" class="trip"><p class="tripText">Tutorial</p></div>
+    <div id="two" class="trip"><p class="tripText">2Spooky4Me</p></div>
+  </div>
+
+  <div class="choices noselect">
+    <div class="choice1 heading"></div>
+    <div class="choice2 heading"></div>  
+  </div>
+
+  <div class="end noselect">
+    <p class="heading">The End</p>
+    <hr>
+    <a href="index.html"><div class="button2">Return Home</div></a>
+  </div>
+
+    <div class="wrapper noselect">
+
+        <div class="name">
+          <div class="text"><span id="name"></span></div>
+        </div>
+        
+        <div class="container">
+        
+        <div id="main"></div>
+        <div id="secondary"></div>
+
+        </div>
+
+        <div class="wiki">
+           <div class="wiki-text"><p id="article"></p></div>
+        </div>
+
+    </div>
 
   </body>
 </html>
