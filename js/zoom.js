@@ -14,6 +14,7 @@ var interval;
 var disabled = true;
 var choice = false;
 var path = '';
+var exit = false;
 
 
 //mouse down event
@@ -182,9 +183,12 @@ function checkImage(image) {
 		readSVG(number)
 		pause();
 
-		if (choice === true)
-		{
+		if (choice === true) {
 			choose();
+		}
+
+		if (exit === true) {
+			exitTrip();
 		}
 	}
 }
@@ -203,9 +207,12 @@ function checkText(text) {
 			second = 'second';
 		}
 
-		if (choice === true)
-		{
+		if (choice === true) {
 			choose();
+		}
+
+		if (exit === true) {
+			exitTrip();
 		}
 	}
 }
@@ -275,20 +282,19 @@ function changeText(track, spec, num) {
 
 	$.get(string, function(data) {
 	text = '<div class="' + spec + '">'+ data + '</div>';
+	if (data === '') {
+		choice = true;
+	}
+
+	if (data === 'exit code 1') {
+		exit = true;
+		text = '<div class="' + spec + '">'+ '' + '</div>';	
+	}
 	if (track === 1) {
 		$('#main').html(text);
 	}
 	else {
 		$('#secondary').html(text);
-	}
-
-	if (data === '') {
-		choice = true;
-	}
-
-	if (data === 'exit code 1')
-	{
-		exit();
 	}
 	inText = $('.' + spec);
 	inText.css('font-size', '1px');
@@ -370,10 +376,8 @@ function pause() {
 	$('#name').fadeIn();
 	$('#article').fadeIn();
 	$(document).trigger('mouseup');
-	while (up == true)
-	{
-		if($(document).click())
-		{
+	while (up == true) {
+		if($(document).click()) {
 			break;
 		}
 	}
@@ -409,7 +413,7 @@ function getChoices(choice, element, spec) {
 }
 
 //reached end of trip
-function exit() {
+function exitTrip() {
 	$('.wrapper').hide();
 	$('#main').html('');
 	$('#secondary').html('');

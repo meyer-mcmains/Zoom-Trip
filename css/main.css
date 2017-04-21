@@ -37,7 +37,6 @@ body {
 .wrapper {
     display: flex;
     justify-content: center;
-    -webkit-user-select: none; /* Chrome/Safari */        
 }
 
 .name {
