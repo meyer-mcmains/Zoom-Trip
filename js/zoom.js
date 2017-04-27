@@ -16,14 +16,13 @@ var choice = false;
 var path = '';
 var exit = false;
 
-
 //mouse down event
 $(document).mousedown(function() {
 	if (disabled === true) {
 		return;
 	}
 	else {
-		interval = setInterval(performWhileMouseDown, 50);
+		interval = setInterval(performWhileMouseDown, 40); //this number is the zoom speed
 	}
 }).mouseup(function() {
     clearInterval(interval);
@@ -48,12 +47,25 @@ $(document).ready(function() {
 	});
 });
 
+//tutorial trip button
+$(document).ready(function() {
+	$('#two').click(function() {
+		$('.trips').fadeOut();
+		path = 'scary/';
+		$('body').css('background-color', 'black');
+		disabled = false;
+	});
+});
+
 //choice1 button
 $(document).ready(function() {
 	$('.choice1').click(function() {
+		path = path + 'one/';
+		imgNum = 1;
+		one = 1;
+		two = 1;
 		$('.choices').fadeOut();
 		$('.wrapper').show();
-		path = path + 'one/';
 		disabled = false;
 	});
 });
@@ -61,9 +73,12 @@ $(document).ready(function() {
 //choice2 button
 $(document).ready(function() {
 	$('.choice2').click(function() {
+		path = path + 'two/';
+		imgNum = 1;
+		one = 1;
+		two = 1;
 		$('.choices').fadeOut();
 		$('.wrapper').show();
-		path = path + 'two/';
 		disabled = false;
 	});
 });
@@ -179,13 +194,10 @@ function checkImage(image) {
 			first = 'first';
 			second = 'second';
 		}
+		$.playSound(path + (imgNum - 2) + '.mp3');
 		number = image.data('num');
 		readSVG(number)
 		pause();
-
-		if (choice === true) {
-			choose();
-		}
 
 		if (exit === true) {
 			exitTrip();
@@ -312,7 +324,7 @@ function changeText(track, spec, num) {
 
 //read in from the image file
 function changeImage(track, spec, num) {
-	img = '<img data-num="'+ num +'" class="' + spec + '" src="' + path + num + '.svg"/>';
+	var img = '<img data-num="'+ num +'" class="' + spec + '" src="' + path + num + '.svg"/>';
 	if (track === 1) {
 		$('#main').html(img);
 	}
@@ -368,7 +380,7 @@ function getName2(xml) {
     var xmlDoc = xml.responseXML;
     var tag = xmlDoc.getElementsByTagName("wiki")[0];
     var text = tag.childNodes[0];
-    $('#article').html(text);
+	$('#article').html(text);
 }
 
 //force stop zooming
@@ -379,6 +391,9 @@ function pause() {
 	while (up == true) {
 		if($(document).click()) {
 			break;
+			if (choice === true) {
+				choose();
+			}
 		}
 	}
 }
@@ -397,19 +412,35 @@ function choose() {
 	$('#main').html('');
 	$('#secondary').html('');
 	disabled = true;
-	getChoices('one', '.choice1', 'one');
-	getChoices('two', '.choice2', 'two');
+	getChoices('one', 'choice1');
+	getChoices('two', 'choice2');
 	choice = false;
-	imgNum = 0;
 }
 
-//get choices text from files
-function getChoices(choice, element, spec) {
-	var string = path + choice + '.txt';
-	$.get(string, function(data) {
-	var text = '<div class="' + spec + '">'+ data + '</div>'; 
-	$(element).html(text);
-	}, 'text');
+function getChoices(num, id) {
+	$('#cPic' + num).attr('src', path + num + '.svg');	
+	readChoice(num);
+}
+
+//read xml format
+function readChoice(number) {
+	var xhttp;
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	        getChoice(this, number);
+	    }
+	};
+	xhttp.open("GET", path + number + ".svg", true);
+	xhttp.send();
+}
+
+//get the content from the xml
+function getChoice(xml, num) { 
+    var xmlDoc = xml.responseXML;
+    var tag = xmlDoc.getElementsByTagName("wiki")[0];
+    var text = tag.childNodes[0];
+   	$('.text' + num).html(text);
 }
 
 //reached end of trip

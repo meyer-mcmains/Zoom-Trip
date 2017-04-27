@@ -58,6 +58,7 @@ body {
     width: 30%;
     position: relative;
     overflow: hidden;
+    font-family: orbitron;
 }
 
 .wiki-text {
@@ -71,7 +72,8 @@ body {
 
 #name {
     display: none;
-    font-size: 10vw;
+    font-size: 9vw;
+    font-family: orbitron;
 }
 
 #article {
@@ -92,6 +94,7 @@ body {
     z-index: 1;
     display: block;
     opacity: 0.0;
+    font-family: orbitron;
 }
 
 .centerText2 {
@@ -100,6 +103,7 @@ body {
     font-size: 1px;
     z-index: -1;
     display: block;
+    font-family: orbitron;
 }
 
 #secondary {
@@ -179,8 +183,6 @@ body {
 }
 
 .choice1 {
-    background-color: #1b1b1b;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     width: 48%;
     height: 100%;
     border-radius: 25px;
@@ -191,8 +193,6 @@ body {
 }
 
 .choice2 {
-    background-color: #1b1b1b;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     width: 48%;
     height: 100%;
     border-radius: 25px;
@@ -283,4 +283,14 @@ a {
     text-align: center;
     width: calc(86% / 3);
     overflow: hidden;
+}
+
+.choicePic {
+    width: 75%;
+    max-height: 75%;
+}
+
+.choiceText {
+    color: white;
+    font-size: 2vw;
 }
