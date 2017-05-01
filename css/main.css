@@ -183,13 +183,13 @@ body {
 }
 
 .choice1 {
-    width: 48%;
+    width: 50%;
     height: 100%;
     border-radius: 25px;
     cursor: default;
     float: left;
-    margin-right: 2%;
     cursor: pointer;
+    position: relative;
 }
 
 .choice2 {
@@ -200,6 +200,7 @@ body {
     float: left;
     margin-left: 2%;
     cursor: pointer;
+    position: relative;
 }
 
 .one {
@@ -286,11 +287,14 @@ a {
 }
 
 .choicePic {
-    width: 75%;
     max-height: 75%;
+    max-width: 100%;
 }
 
 .choiceText {
     color: white;
     font-size: 2vw;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 }
