@@ -9,7 +9,6 @@ var one = 1;
 var two = 1;
 var first = 'first';
 var second = 'second';
-var up = false;
 var interval;
 var disabled = true;
 var choice = false;
@@ -26,7 +25,6 @@ $(document).mousedown(function() {
 	}
 }).mouseup(function() {
     clearInterval(interval);
-    up = true;
 });
 
 //used for tutorial button click
@@ -61,9 +59,6 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$('.choice1').click(function() {
 		path = path + 'one/';
-		imgNum = 1;
-		one = 1;
-		two = 1;
 		$('.choices').fadeOut();
 		$('.wrapper').show();
 		disabled = false;
@@ -74,9 +69,6 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$('.choice2').click(function() {
 		path = path + 'two/';
-		imgNum = 1;
-		one = 1;
-		two = 1;
 		$('.choices').fadeOut();
 		$('.wrapper').show();
 		disabled = false;
@@ -199,6 +191,13 @@ function checkImage(image) {
 		readSVG(number)
 		pause();
 
+		if ($(document).mousedown(function() {
+			if (choice === true) {
+				choose();
+			}
+			$.stopSound();
+		}));
+
 		if (exit === true) {
 			exitTrip();
 		}
@@ -217,10 +216,6 @@ function checkText(text) {
 			two = 1;
 			first = 'first';
 			second = 'second';
-		}
-
-		if (choice === true) {
-			choose();
 		}
 
 		if (exit === true) {
@@ -388,14 +383,6 @@ function pause() {
 	$('#name').fadeIn();
 	$('#article').fadeIn();
 	$(document).trigger('mouseup');
-	while (up == true) {
-		if($(document).click()) {
-			break;
-			if (choice === true) {
-				choose();
-			}
-		}
-	}
 }
 
 //get font size
@@ -408,13 +395,14 @@ function getTextSize(object) {
 //call this function to display choices
 function choose() {
 	$('.wrapper').hide();
-	$('.choices').fadeIn();
+	$('.choices').fadeIn(2000);
 	$('#main').html('');
 	$('#secondary').html('');
-	disabled = true;
+	$('#article').html('');
+	$('#name').html('');
+	resetVars();
 	getChoices('one', 'choice1');
 	getChoices('two', 'choice2');
-	choice = false;
 }
 
 function getChoices(num, id) {
@@ -450,4 +438,21 @@ function exitTrip() {
 	$('#secondary').html('');
 	disabled = true;
 	$('.end').fadeIn();
+}
+
+//reset important variables before loading a new folder
+function resetVars() {
+	imgNum = 1;
+	mainType = null;
+	secondaryType = null;
+	type = null;
+	type2 = null;
+	main = $('#main');
+	secondary = $('#secondary');
+	one = 1;
+	two = 1;
+	first = 'first';
+	second = 'second';
+	disabled = true;
+	choice = false;
 }
