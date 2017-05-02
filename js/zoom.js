@@ -67,8 +67,8 @@ $(document).ready(function() {
 		$('.choices').fadeOut();
 		$('#cPicone').attr('src', '').delay(500);
 		$('#cPictwo').attr('src', '').delay(500);
-		$('.wrapper').show();
 		resetVars();
+		$('.wrapper').show();
 		disabled = false;
 	});
 });
@@ -80,8 +80,8 @@ $(document).ready(function() {
 		$('.choices').fadeOut();
 		$('#cPicone').attr('src', '').delay(500);
 		$('#cPictwo').attr('src', '').delay(500);
-		$('.wrapper').show();
 		resetVars();
+		$('.wrapper').show();
 		disabled = false;
 	});
 });
