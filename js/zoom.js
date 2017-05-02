@@ -60,6 +60,8 @@ $(document).ready(function() {
 	$('.choice1').click(function() {
 		path = path + 'one/';
 		$('.choices').fadeOut();
+		$('#cPicone').attr('src', '').delay(500);
+		$('#cPictwo').attr('src', '').delay(500);
 		$('.wrapper').show();
 		disabled = false;
 	});
@@ -70,6 +72,8 @@ $(document).ready(function() {
 	$('.choice2').click(function() {
 		path = path + 'two/';
 		$('.choices').fadeOut();
+		$('#cPicone').attr('src', '').delay(500);
+		$('#cPictwo').attr('src', '').delay(500);
 		$('.wrapper').show();
 		disabled = false;
 	});
@@ -143,6 +147,7 @@ function zoom() {
 
 //attempt to get next file
 function get(var1, var2) {
+
 	$.ajax({
 		url:path + var2 + '.svg',
 		error: function()
@@ -187,15 +192,20 @@ function checkImage(image) {
 			second = 'second';
 		}
 		$.playSound(path + (imgNum - 2) + '.mp3');
+		//$('.sound-player').trigger('play');
+
 		number = image.data('num');
 		readSVG(number)
 		pause();
 
 		if ($(document).mousedown(function() {
+
+			//$('.sound-player').trigger('pause');
+			$('.sound-player').remove();
+
 			if (choice === true) {
 				choose();
 			}
-			$.stopSound();
 		}));
 
 		if (exit === true) {
@@ -319,7 +329,7 @@ function changeText(track, spec, num) {
 
 //read in from the image file
 function changeImage(track, spec, num) {
-	var img = '<img data-num="'+ num +'" class="' + spec + '" src="' + path + num + '.svg"/>';
+	var img = '<img draggable= false data-num="'+ num +'" class="' + spec + '" src="' + path + num + '.svg"/>';
 	if (track === 1) {
 		$('#main').html(img);
 	}
@@ -405,6 +415,8 @@ function choose() {
 	getChoices('two', 'choice2');
 }
 
+
+//get choice images
 function getChoices(num, id) {
 	$('#cPic' + num).attr('src', path + num + '.svg');	
 	readChoice(num);

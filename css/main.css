@@ -7,6 +7,7 @@
     index: 1;
     opacity: 0.5;
     display: block;
+    pointer-events: none;
 }
 
 .nextImage {
@@ -18,6 +19,7 @@
     display: block;
     index: -1;
     opacity: 0.5;
+    pointer-events: none;
 }
 
 .text {
@@ -72,7 +74,7 @@ body {
 
 #name {
     display: none;
-    font-size: 9vw;
+    font-size: 7vw;
     font-family: orbitron;
 }
 
