@@ -15,6 +15,11 @@ var choice = false;
 var path = '';
 var exit = false;
 
+//disable right click menu
+$(document).on("contextmenu",function(e){
+        return false;
+    });
+
 //mouse down event
 $(document).mousedown(function() {
 	if (disabled === true) {
@@ -63,6 +68,7 @@ $(document).ready(function() {
 		$('#cPicone').attr('src', '').delay(500);
 		$('#cPictwo').attr('src', '').delay(500);
 		$('.wrapper').show();
+		resetVars();
 		disabled = false;
 	});
 });
@@ -75,6 +81,7 @@ $(document).ready(function() {
 		$('#cPicone').attr('src', '').delay(500);
 		$('#cPictwo').attr('src', '').delay(500);
 		$('.wrapper').show();
+		resetVars();
 		disabled = false;
 	});
 });
@@ -87,6 +94,7 @@ function performWhileMouseDown() {
 
 //zoom function
 function zoom() {
+
 	if (one === 1) {
 		get(1, imgNum);
 		imgNum ++;
@@ -192,7 +200,6 @@ function checkImage(image) {
 			second = 'second';
 		}
 		$.playSound(path + (imgNum - 2) + '.mp3');
-		//$('.sound-player').trigger('play');
 
 		number = image.data('num');
 		readSVG(number)
@@ -200,10 +207,11 @@ function checkImage(image) {
 
 		if ($(document).mousedown(function() {
 
-			//$('.sound-player').trigger('pause');
+			$('.sound-player').trigger('pause');
 			$('.sound-player').remove();
 
 			if (choice === true) {
+				disabled = true;
 				choose();
 			}
 		}));
@@ -227,6 +235,11 @@ function checkText(text) {
 			first = 'first';
 			second = 'second';
 		}
+
+		if (choice === true) {
+				disabled = true;
+				choose();
+			}
 
 		if (exit === true) {
 			exitTrip();
