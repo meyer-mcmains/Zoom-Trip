@@ -50,10 +50,11 @@ $(document).ready(function() {
 	});
 });
 
-//tutorial trip button
+//scary trip button
 $(document).ready(function() {
 	$('#two').click(function() {
 		$('.trips').fadeOut();
+		changeFont('Jolly Lodger');
 		path = 'scary/';
 		$('body').css('background-color', 'black');
 		disabled = false;
@@ -419,10 +420,6 @@ function getTextSize(object) {
 function choose() {
 	$('.wrapper').hide();
 	$('.choices').fadeIn(2000);
-	$('#main').html('');
-	$('#secondary').html('');
-	$('#article').html('');
-	$('#name').html('');
 	resetVars();
 	getChoices('one', 'choice1');
 	getChoices('two', 'choice2');
@@ -480,4 +477,17 @@ function resetVars() {
 	second = 'second';
 	disabled = true;
 	choice = false;
+	$('#main').html('');
+	$('#secondary').html('');
+	$('#article').html('');
+	$('#name').html('');
 }
+
+function changeFont(font) {
+	$('.wiki').css('font-family', font);
+	$('.wiki').css('font-size', '1.7vw');
+	$('#name').css('font-family', font);
+	$('.centerText').css('font-family', font);
+	$('.centerText2').css('font-family', font);
+	$('.choiceText').css('font-family', font);
+} 
