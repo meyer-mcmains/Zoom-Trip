@@ -15,7 +15,7 @@ var choice = false;
 var path = '';
 var exit = false;
 var down;
-var audio;
+var audio = new Audio();
 
 //disable right click menu
 $(document).on("contextmenu",function(e){
@@ -200,6 +200,7 @@ function checkImage(image) {
 	var toggle = 1;
 	var number;
 	if (($('.container').width()-50) < (image.width()+padding) || ($('.container').height()-50) < (image.height()+padding)) {
+		audio.pause();
 		if (first === 'first') {
 			one = 1;
 			first = 'second';
@@ -237,6 +238,7 @@ function checkImage(image) {
 //determine if text is max size
 function checkText(text) {
 	if (250 < getTextSize(text)) {
+		audio.pause();
 		if (first === 'first') {
 			one = 1;
 			first = 'second';
