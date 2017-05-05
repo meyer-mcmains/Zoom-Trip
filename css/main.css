@@ -269,8 +269,8 @@ a {
 
 .trip {
     height: 18%;
-    width: calc(86% / 3);
-    margin: 2%;
+    width: calc(97% / 2);
+    margin-left: 1%;
     background-color: grey;
     display: inline-block;
     border-radius: 10px;
@@ -284,7 +284,7 @@ a {
     font-family: Orbitron;
     color: white;
     text-align: center;
-    width: calc(86% / 3);
+    width: calc(97% / 2);
     overflow: hidden;
 }
 

@@ -14,6 +14,8 @@ var disabled = true;
 var choice = false;
 var path = '';
 var exit = false;
+var down;
+var audio;
 
 //disable right click menu
 $(document).on("contextmenu",function(e){
@@ -22,6 +24,7 @@ $(document).on("contextmenu",function(e){
 
 //mouse down event
 $(document).mousedown(function() {
+	down = true;
 	if (disabled === true) {
 		return;
 	}
@@ -29,6 +32,7 @@ $(document).mousedown(function() {
 		interval = setInterval(performWhileMouseDown, 40); //this number is the zoom speed
 	}
 }).mouseup(function() {
+	down = false;
     clearInterval(interval);
 });
 
@@ -90,7 +94,13 @@ $(document).ready(function() {
 
 //if mouse down zoom
 function performWhileMouseDown() {
-    zoom();
+	if (disabled === true) {
+		return;
+	}
+	else {
+		zoom();
+	}
+    
 }
 
 //zoom function
@@ -200,22 +210,23 @@ function checkImage(image) {
 			first = 'first';
 			second = 'second';
 		}
-		$.playSound(path + (imgNum - 2) + '.mp3');
+		$('#sound').attr('src', path + (imgNum - 2) + '.mp3');
+		audio = new Audio(path + (imgNum - 2) + '.mp3');
+		audio.play();
 
 		number = image.data('num');
 		readSVG(number)
 		pause();
 
-		if ($(document).mousedown(function() {
-
-			$('.sound-player').trigger('pause');
-			$('.sound-player').remove();
+		if (down === true) {
 
 			if (choice === true) {
 				disabled = true;
+				main.html('');
+				secondary.html('');
 				choose();
 			}
-		}));
+		}
 
 		if (exit === true) {
 			exitTrip();
@@ -418,6 +429,7 @@ function getTextSize(object) {
 
 //call this function to display choices
 function choose() {
+	audio.pause();
 	$('.wrapper').hide();
 	$('.choices').fadeIn(2000);
 	resetVars();
